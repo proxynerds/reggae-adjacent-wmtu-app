@@ -1,7 +1,7 @@
 package com.epipenrx.wmturadio
 
 object Constants {
-    const val STREAM_URL = "http://stream.wmtu.fm:8000/wmtu-live"
+    const val STREAM_URL = "https://stream.wmtu.fm/wmtu-live"
     const val STATION_NAME = "WMTU 91.9 FM"
 
     const val SHOW_NAME = "Reggae Adjacent with DJ TomASS"
@@ -11,7 +11,12 @@ object Constants {
     const val SHOW_MINUTE = 0
 
     const val REMINDER_CHANNEL_ID = "show_reminders"
-    const val REMINDER_NOTIFICATION_ID = 1001
+    // Must not collide with Media3's own "now playing" notification, which
+    // defaults to id 1001 (androidx.media3.session.MediaNotification) -- a
+    // real collision was found during testing: this id posting over the
+    // active playback notification just got silently clobbered right back
+    // by the session's own notification using the same id.
+    const val REMINDER_NOTIFICATION_ID = 5001
 
     const val ACTION_SHOW_REMINDER = "com.epipenrx.wmturadio.ACTION_SHOW_REMINDER"
     const val REMINDER_REQUEST_CODE = 2001
