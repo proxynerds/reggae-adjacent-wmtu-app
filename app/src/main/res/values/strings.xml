@@ -14,4 +14,51 @@
     <string name="reminder_channel_description">Weekly reminder before Reggae Adjacent with DJ TomASS</string>
     <string name="reminder_notification_title">WMTU 91.9</string>
     <string name="reminder_notification_text">%1$s is starting now</string>
+
+    <string name="nav_play_title">Play</string>
+    <string name="nav_options_title">Options</string>
+    <string name="nav_about_title">About</string>
+
+    <string name="refresh_content_description">Refresh stream</string>
+    <string name="show_artwork_content_description">Reggae Adjacent with DJ TomASS show artwork</string>
+    <string name="featuring_label">FEATURING</string>
+    <string name="show_caption">Reggae Adjacent, Mondays at 6pm, hosted by DJ TomASS</string>
+    <string name="wmtu_website_link">Check out wmtu.fm for station info</string>
+    <string name="wmtu_archives_link">Archived shows: wmtu.fm/archives</string>
+    <string name="credits_footer">Brought to you by ProxyNerds. We do the nerd so you don\'t have to.</string>
+
+    <string name="options_playback_section">Playback</string>
+    <string name="options_resume_continue">Resume where I left off</string>
+    <string name="options_resume_continue_detail">Picks up from the buffered audio, even mid-song.</string>
+    <string name="options_resume_reload">Reload the live stream</string>
+    <string name="options_resume_reload_detail">Always jumps to what\'s airing right now.</string>
+
+    <string name="options_buffer_section">Buffer</string>
+    <plurals name="options_buffer_value">
+        <item quantity="one">Keep up to %1$d minute buffered (~%2$s)</item>
+        <item quantity="other">Keep up to %1$d minutes buffered (~%2$s)</item>
+    </plurals>
+    <string name="options_buffer_explainer">WMTU Radio keeps a short rolling buffer of the live broadcast in memory -- not saved to your device\'s storage -- so a brief pause doesn\'t lose your spot. The buffer clears when you reload the stream, close the app, or restart your device. A longer buffer lets you pause longer without losing your place, at the cost of a bit more memory while playing. Changes apply the next time the stream reloads.</string>
+
+    <string name="options_about_section">About ProxyNerds</string>
+    <string name="options_about_app_desc">Built in support of Reggae Adjacent with DJ TomASS, live on WMTU.fm Mondays at 6pm.</string>
+    <string name="options_about_builder">This app is owned and built by ProxyNerds, a Michigan Tech (MTU) alum-founded, founder-owned and operated AI Solutions and IT Services company. Not affiliated with or operated by WMTU.fm.</string>
+    <string name="options_about_tagline">ProxyNerds. We do the nerd so you don\'t have to.</string>
+    <string name="options_about_contact_cd">Email ProxyNerds</string>
+    <string name="options_about_logo_cd">ProxyNerds logo</string>
+    <string name="options_about_version">Version %1$s</string>
+    <string name="options_about_privacy">Privacy Policy</string>
+
+    <string name="privacy_policy_title">ProxyNerds Privacy Policy</string>
+    <string name="privacy_policy_view_online">View the hosted copy</string>
+
+    <string name="about_wmtu_section">WMTU 91.9 FM</string>
+    <string name="about_wmtu_blurb">WMTU 91.9 FM is Michigan Technological University\'s student-run, non-commercial radio station, broadcasting from Houghton, Michigan. Programming is chosen and run by MTU students, including shows like Reggae Adjacent with DJ TomASS.</string>
+    <string name="about_wmtu_link">wmtu.fm</string>
+    <string name="about_wmtu_logo_cd">WMTU logo</string>
+
+    <string name="about_mtu_section">Michigan Tech</string>
+    <string name="about_mtu_blurb">Michigan Technological University is a public research university in Houghton, Michigan, founded in 1885. WMTU operates as part of MTU\'s student media.</string>
+    <string name="about_mtu_link">mtu.edu</string>
+    <string name="about_mtu_logo_cd">Michigan Technological University seal</string>
 </resources>

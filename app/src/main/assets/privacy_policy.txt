@@ -1,0 +1,37 @@
+ProxyNerds Privacy Policy
+Covering: WMTU Radio (Android app)
+Last updated: October 28, 2026
+
+This is ProxyNerds' privacy policy. ProxyNerds, a Michigan Tech alum-founded, founder-owned and operated AI Solutions and IT Services company, built and owns this app, WMTU Radio. The app was made in support of Reggae Adjacent with DJ TomASS, the reggae show DJ TomASS hosts live on WMTU.fm every Monday at 6pm. WMTU Radio plays WMTU 91.9 FM's publicly available live stream, the way radio-aggregator apps (the kind that let you pick a station from around the country) stream the stations they cover; this app just focuses on one station and one show. ProxyNerds does not own, operate, or have any affiliation with WMTU.fm, WMTU 91.9 FM, or Michigan Technological University, and WMTU is not the publisher of this policy.
+
+THE SHORT VERSION
+ProxyNerds doesn't collect, store, or share any personal information through this app. There are no user accounts, no analytics, and no trackers.
+
+WHAT THE APP DOES WITH DATA
+- Streaming audio: when you press Play, your device connects directly to WMTU's streaming server to receive the live broadcast. That connection is between your device and WMTU's server. ProxyNerds does not see, log, or relay this traffic.
+- App preferences: your Playback option (resume where you left off vs. reload live) and your buffer-length setting are saved only on your own device, using Android's standard local app storage. They are never transmitted to ProxyNerds or anyone else, and are deleted if you uninstall the app.
+- Live buffer: to let you briefly pause without losing your place, the app keeps a short rolling buffer of recently played audio in your device's memory (RAM) while the app is running. This buffer is never written to your device's storage and is cleared automatically when you reload the stream, close the app, or restart your device.
+- No accounts, no sign-in, no personal information is ever requested.
+
+PERMISSIONS THE APP REQUESTS, AND WHY
+- Internet / network state: required to play the live audio stream.
+- Foreground service / media playback: keeps the stream playing when the app is in the background or your screen is off.
+- Notifications: shows the playback controls in your notification shade while listening, and the weekly reminder before Reggae Adjacent with DJ TomASS airs.
+- Bluetooth connect: lets the app notice when you connect to or disconnect from a Bluetooth audio device (like a car stereo or headphones) so playback can pause/resume sensibly.
+- Schedule exact alarms / receive boot completed: used only to fire the weekly show reminder at the right time, including after your device restarts.
+- Wake lock: keeps audio streaming reliably while the screen is off.
+
+None of these permissions are used by ProxyNerds to collect or share data about you. They exist only to make live playback and the show reminder work correctly.
+
+THIRD PARTIES
+ProxyNerds does not use any third-party analytics or crash-reporting SDKs in this app. The only outside connection the app makes is the direct stream request to WMTU's own streaming server to play the broadcast.
+
+CHILDREN'S PRIVACY
+This app is not directed at children under 13, and ProxyNerds does not knowingly collect any information from anyone through it, regardless of age.
+
+CHANGES TO THIS POLICY
+If this policy changes, the update will ship with a new app version and an updated "Last updated" date above. If ProxyNerds publishes additional apps in the future, this same policy may be extended to cover them, clearly noting what each app does differently.
+
+CONTACT
+ProxyNerds. Questions, feedback, or data requests: proxynerds911@gmail.com
+ProxyNerds - AI Solutions & IT Services - Michigan Tech alum-founded, founder-owned and operated

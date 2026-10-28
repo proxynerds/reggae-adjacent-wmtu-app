@@ -25,4 +25,22 @@ object Constants {
     // auto-resume on the next device that connects -- mirrors the 15s window
     // adopted for audiobookshelf-app's BT auto-resume feature (PR #1914).
     const val BT_RESUME_WINDOW_MS = 15_000L
+
+    const val WMTU_WEBSITE_URL = "https://wmtu.fm"
+    const val WMTU_ARCHIVES_URL = "https://wmtu.fm/archives"
+    const val MTU_WEBSITE_URL = "https://www.mtu.edu"
+
+    // Used only for the Options screen's "approx memory" buffer estimate.
+    // Measured directly against the live stream 2026-10-28 (two curl samples,
+    // ~45 KB/s steady-state each) rather than assumed from a typical bitrate,
+    // since this stream runs noticeably higher than a standard 128kbps feed.
+    // Re-measure if WMTU ever changes their encoding.
+    const val STREAM_APPROX_BYTES_PER_MINUTE = 2_700_000L
+
+    const val CONTACT_EMAIL = "proxynerds911@gmail.com"
+    // Hosted copy published 2026-10-28 (see docs/PLAY_STORE_LISTING.md). It's
+    // a private-by-default Claude Artifact -- share it (its page's Share
+    // menu) before pointing Play Console at it, or move it to a more
+    // permanent host like GitHub Pages and update this URL.
+    const val PRIVACY_POLICY_URL = "https://claude.ai/artifact/3js9ukEwabjbTWBRCRGWxx"
 }

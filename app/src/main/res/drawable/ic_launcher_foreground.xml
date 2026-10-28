@@ -1,27 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="108dp"
-    android:height="108dp"
-    android:viewportWidth="108"
-    android:viewportHeight="108">
+<!--
+  App icon foreground is the ProxyNerds gorilla mark (app/src/main/res/drawable-nodpi/proxynerds_logo.webp),
+  inset to stay inside the adaptive-icon safe zone. The old broadcast-rings
+  mark is kept as ic_launcher_foreground_legacy.xml in case we want to swap
+  back later.
+-->
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/ic_launcher_foreground_bitmap"
+    android:insetLeft="18dp"
+    android:insetTop="18dp"
+    android:insetRight="18dp"
+    android:insetBottom="18dp" />
 
-    <!-- Broadcast dot -->
-    <path
-        android:pathData="M62,54 A8,8 0 1,1 46,54 A8,8 0 1,1 62,54 Z"
-        android:fillColor="@color/wmtu_gold" />
-
-    <!-- Broadcast rings -->
-    <path
-        android:pathData="M72,54 A18,18 0 1,1 36,54 A18,18 0 1,1 72,54 Z"
-        android:fillColor="#00000000"
-        android:strokeColor="@color/wmtu_gold"
-        android:strokeWidth="3" />
-
-    <path
-        android:pathData="M82,54 A28,28 0 1,1 26,54 A28,28 0 1,1 82,54 Z"
-        android:fillColor="#00000000"
-        android:strokeColor="@color/wmtu_gold"
-        android:strokeWidth="3"
-        android:fillAlpha="0.7" />
-
-</vector>

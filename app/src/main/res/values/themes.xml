@@ -4,4 +4,12 @@
         <item name="colorPrimary">@color/wmtu_gold</item>
         <item name="colorOnPrimary">@color/wmtu_black</item>
     </style>
+
+    <style name="ShapeAppearance.WmtuRadio.RoundedImage" parent="ShapeAppearance.Material3.Corner.Medium">
+        <item name="cornerSize">16dp</item>
+    </style>
+
+    <style name="ShapeAppearance.WmtuRadio.Circle" parent="ShapeAppearance.Material3.Corner.Full">
+        <item name="cornerSize">50%</item>
+    </style>
 </resources>

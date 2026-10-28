@@ -6,6 +6,7 @@ import androidx.media3.common.AudioAttributes
 import androidx.media3.common.C
 import androidx.media3.common.MediaItem
 import androidx.media3.common.MediaMetadata
+import androidx.media3.exoplayer.DefaultLoadControl
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.session.MediaSession
 import androidx.media3.session.MediaSessionService
@@ -35,7 +36,23 @@ class PlaybackService : MediaSessionService() {
             .setContentType(C.AUDIO_CONTENT_TYPE_MUSIC)
             .build()
 
+        // Back buffer is the "cache" the Options screen's buffer setting
+        // controls: how much already-played live audio ExoPlayer keeps in
+        // memory (never written to disk) so tapping Play while Resume mode
+        // is CONTINUE can pick up mid-buffer instead of jumping to live.
+        // Read once at service creation -- a running player's LoadControl
+        // can't be swapped live, so a changed value takes effect next time
+        // the stream reloads/restarts (PlaybackHost.reloadStream, or a
+        // fresh service instance).
+        val loadControl = DefaultLoadControl.Builder()
+            .setBackBuffer(
+                Prefs.cacheMinutes(this) * 60_000,
+                /* retainBackBufferFromKeyframe= */ true
+            )
+            .build()
+
         player = ExoPlayer.Builder(this)
+            .setLoadControl(loadControl)
             .setAudioAttributes(audioAttributes, /* handleAudioFocus= */ true)
             .setHandleAudioBecomingNoisy(true)
             .build()

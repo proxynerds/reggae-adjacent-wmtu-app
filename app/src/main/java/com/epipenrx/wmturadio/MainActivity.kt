@@ -7,38 +7,48 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.commit
+import androidx.media3.common.PlaybackException
 import androidx.media3.common.Player
 import androidx.media3.session.MediaController
 import androidx.media3.session.SessionToken
 import com.epipenrx.wmturadio.databinding.ActivityMainBinding
 import com.google.common.util.concurrent.MoreExecutors
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), PlaybackHost {
 
     private lateinit var binding: ActivityMainBinding
     private var controller: MediaController? = null
-
-    private val playerListener = object : Player.Listener {
-        override fun onIsPlayingChanged(isPlaying: Boolean) {
-            updatePlayPauseUi(isPlaying)
-        }
-    }
+    private val hostListeners = mutableSetOf<Player.Listener>()
+    private val readyCallbacks = mutableListOf<(MediaController) -> Unit>()
+    private val handler = Handler(Looper.getMainLooper())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.showReminderText.text = getString(
-            R.string.show_reminder_summary,
-            Constants.SHOW_NAME
-        )
+        if (savedInstanceState == null) {
+            supportFragmentManager.commit {
+                replace(R.id.fragmentContainer, PlayFragment())
+            }
+        }
 
-        binding.playPauseButton.setOnClickListener {
-            val c = controller ?: return@setOnClickListener
-            if (c.isPlaying) c.pause() else c.play()
+        binding.bottomNav.setOnItemSelectedListener { item ->
+            val fragment = when (item.itemId) {
+                R.id.nav_play -> PlayFragment()
+                R.id.nav_options -> OptionsFragment()
+                R.id.nav_about -> AboutFragment()
+                else -> return@setOnItemSelectedListener false
+            }
+            supportFragmentManager.commit {
+                replace(R.id.fragmentContainer, fragment)
+            }
+            true
         }
 
         requestRuntimePermissionsIfNeeded()
@@ -50,10 +60,12 @@ class MainActivity : AppCompatActivity() {
         val future = MediaController.Builder(this, sessionToken).buildAsync()
         future.addListener(
             {
-                controller = future.get().also {
-                    it.addListener(playerListener)
-                    updatePlayPauseUi(it.isPlaying)
-                }
+                val c = future.get()
+                controller = c
+                hostListeners.forEach { c.addListener(it) }
+                val pending = readyCallbacks.toList()
+                readyCallbacks.clear()
+                pending.forEach { it(c) }
             },
             MoreExecutors.directExecutor()
         )
@@ -61,18 +73,77 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStop() {
         super.onStop()
-        controller?.removeListener(playerListener)
+        controller?.let { c -> hostListeners.forEach { c.removeListener(it) } }
         controller?.release()
         controller = null
     }
 
-    private fun updatePlayPauseUi(isPlaying: Boolean) {
-        binding.playPauseButton.text = getString(
-            if (isPlaying) R.string.action_pause else R.string.action_play
-        )
-        binding.statusText.text = getString(
-            if (isPlaying) R.string.status_playing else R.string.status_idle
-        )
+    override fun currentController(): MediaController? = controller
+
+    override fun addPlaybackListener(listener: Player.Listener) {
+        hostListeners.add(listener)
+        controller?.addListener(listener)
+    }
+
+    override fun removePlaybackListener(listener: Player.Listener) {
+        hostListeners.remove(listener)
+        controller?.removeListener(listener)
+    }
+
+    override fun onControllerReady(callback: (MediaController) -> Unit) {
+        val c = controller
+        if (c != null) callback(c) else readyCallbacks.add(callback)
+    }
+
+    override fun playRespectingPreference() {
+        when (Prefs.resumeMode(this)) {
+            ResumeMode.CONTINUE -> controller?.play()
+            ResumeMode.RELOAD -> reloadStream {}
+        }
+    }
+
+    override fun reloadStream(onSettled: () -> Unit) {
+        val c = controller
+        if (c == null) {
+            onSettled()
+            return
+        }
+        val wasPlaying = c.isPlaying
+        var settled = false
+
+        lateinit var listener: Player.Listener
+        val timeoutRunnable = Runnable {
+            if (!settled) {
+                settled = true
+                c.removeListener(listener)
+                onSettled()
+            }
+        }
+        listener = object : Player.Listener {
+            override fun onPlaybackStateChanged(playbackState: Int) {
+                if (playbackState == Player.STATE_READY && !settled) {
+                    settled = true
+                    handler.removeCallbacks(timeoutRunnable)
+                    c.removeListener(listener)
+                    onSettled()
+                }
+            }
+
+            override fun onPlayerError(error: PlaybackException) {
+                if (!settled) {
+                    settled = true
+                    handler.removeCallbacks(timeoutRunnable)
+                    c.removeListener(listener)
+                    onSettled()
+                }
+            }
+        }
+        c.addListener(listener)
+        handler.postDelayed(timeoutRunnable, RELOAD_TIMEOUT_MS)
+
+        c.stop()
+        c.prepare()
+        if (wasPlaying) c.play()
     }
 
     private fun requestRuntimePermissionsIfNeeded() {
@@ -109,5 +180,6 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         private const val PERMISSION_REQUEST_CODE = 100
+        private const val RELOAD_TIMEOUT_MS = 8_000L
     }
 }
