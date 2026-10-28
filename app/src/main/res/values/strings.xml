@@ -61,4 +61,6 @@
     <string name="about_mtu_blurb">Michigan Technological University is a public research university in Houghton, Michigan, founded in 1885. WMTU operates as part of MTU\'s student media.</string>
     <string name="about_mtu_link">mtu.edu</string>
     <string name="about_mtu_logo_cd">Michigan Technological University seal</string>
+
+    <string name="about_dedication">This app is dedicated to Autumn Jade... AUTUMN IS COMING</string>
 </resources>
