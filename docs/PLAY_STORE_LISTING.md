@@ -8,9 +8,9 @@ Draft copy and prep notes for publishing WMTU Radio to the Play Store. Nothing h
 
 This is a Claude Artifact page and is **private by default**, so before pointing Play Console at it, either:
 1. Open the page and use its Share menu to make it publicly viewable, or
-2. Move the content to a more permanent host you control (e.g. a GitHub Pages site for this repo, since the repo is already public at github.com/epipenRX/reggae-adjacent-wmtu-app) and update `Constants.PRIVACY_POLICY_URL` in the app to point there instead.
+2. Move the content to a more permanent host you control.
 
-Option 2 is the safer long-term choice: Play re-checks this URL periodically, and a repo you own is more durable than a third-party-hosted link. The content to publish is in [`PRIVACY_POLICY.md`](PRIVACY_POLICY.md) (or reuse `app/src/main/assets/privacy_policy.txt`, same text).
+**Note on option 2:** this repo is actually **private** (not public, despite an earlier draft of this doc saying otherwise), and a repo transfer from `github.com/epipenRX/reggae-adjacent-wmtu-app` to `github.com/proxynerds/reggae-adjacent-wmtu-app` was initiated 2026-10-28 and is pending acceptance by the proxynerds account. GitHub Pages needs either a public repo (free on GitHub Free) or a paid plan to publish from a private one -- so either flip this repo to public once it's settled under proxynerds, or host the privacy policy page somewhere else entirely (a small static site, Netlify/Vercel free tier, etc.). Whichever host you pick, the content to publish is in [`PRIVACY_POLICY.md`](PRIVACY_POLICY.md) (or reuse `app/src/main/assets/privacy_policy.txt`, same text). Option 2 (a host you own) is still the safer long-term choice over the Artifact link -- Play re-checks the URL periodically.
 
 ## App details
 
@@ -54,7 +54,7 @@ Option 2 is the safer long-term choice: Play re-checks this URL periodically, an
 
 Play Console requires these; none exist yet as of 2026-10-28:
 - [ ] App icon (512×512 PNG, 32-bit with alpha), can be exported from `app/src/main/res/drawable/ic_launcher_foreground.xml` plus background, or redrawn at that size for crispness.
-- [ ] Feature graphic (1024×500 PNG/JPEG), a banner for the store listing. The `reggae_adjacent_logo.jpg` artwork or the WMTU gold/black palette would work as a starting point.
+- [ ] Feature graphic (1024×500 PNG/JPEG), a banner for the store listing. The `reggae_adjacent_logo.png` artwork or the WMTU gold/black palette would work as a starting point.
 - [ ] At least 2 phone screenshots (recommend 4): Play screen (showing the show artwork + play button), Options screen (showing the playback/buffer settings), and the notification shade with playback controls.
 
 ## Store listing contact / about section
